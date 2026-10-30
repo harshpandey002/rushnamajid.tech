@@ -582,7 +582,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .ladder li:first-child::before { border-color: var(--coral); background: var(--coral); }
 .ladder li span { font-weight: 600; }
-.ladder li time { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.ladder li time { color: var(--ink-3); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 .tags span {
