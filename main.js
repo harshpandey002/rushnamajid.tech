@@ -129,16 +129,24 @@ if (hero && glow && !reduceMotion && window.matchMedia("(pointer: fine)").matche
 }
 
 // ---- Magnetic buttons ----
+// The pointer target is a static wrapper; only the inner element moves.
+// Moving the hovered element itself makes it slide out from under the
+// cursor and flicker between pointer/default.
 if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
-  document.querySelectorAll(".magnetic").forEach((btn) => {
-    btn.addEventListener("pointermove", (e) => {
-      const r = btn.getBoundingClientRect();
+  document.querySelectorAll(".magnetic").forEach((el) => {
+    if (el.hidden) return;
+    const zone = document.createElement("span");
+    zone.className = "magnet-zone";
+    el.parentNode.insertBefore(zone, el);
+    zone.appendChild(el);
+    zone.addEventListener("pointermove", (e) => {
+      const r = zone.getBoundingClientRect();
       const dx = e.clientX - (r.left + r.width / 2);
       const dy = e.clientY - (r.top + r.height / 2);
-      btn.style.transform = `translate(${dx * 0.18}px, ${dy * 0.28}px)`;
+      el.style.transform = `translate(${dx * 0.18}px, ${dy * 0.28}px)`;
     });
-    btn.addEventListener("pointerleave", () => {
-      btn.style.transform = "";
+    zone.addEventListener("pointerleave", () => {
+      el.style.transform = "";
     });
   });
 }
