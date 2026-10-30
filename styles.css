@@ -30,6 +30,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -41,6 +43,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection { background: var(--coral-soft); color: var(--ink); }
@@ -100,7 +103,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .nav::before {
   content: "";
   position: absolute;
-  inset: 0 -100vw;
+  inset: 0 calc(50% - 50vw); /* exactly the viewport width, no overflow */
   background: color-mix(in srgb, var(--paper) 78%, transparent);
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
